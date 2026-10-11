@@ -5,16 +5,16 @@
     "name": "正在北极拔草"
   },
   "category": "玩法",
-  "changelog": "优化视觉表现",
+  "changelog": "",
   "conflicts": [],
   "delisted": false,
-  "description": "把原版「低/中/高每族最多 8 槽」的上限解禁到 16、改装件解禁到 6，默认不修改任何舰船的槽位数值；并修正配装界面的槽位摆位与交互范围。",
+  "description": "把原版「低/中/高每族最多 8 槽」的上限解禁到 16、改装件解禁到 6、结构服务槽解禁到 9（第 9 槽改挂空闲 flag 189，避开与结构燃料舱共用的 172），默认不修改任何舰船/建筑的槽位数值；并修正配装界面的槽位摆位与交互范围。",
   "displayName": "槽位上限解禁 8→16",
   "downloadUrls": [
     {
       "mirror": "github",
       "priority": 1,
-      "url": "https://github.com/Jasper377/evejs-mod-evejs-racks16/releases/download/v3.1.2/evejs-racks16-3.1.2.zip"
+      "url": "https://github.com/Jasper377/evejs-mod-evejs-racks16/releases/download/v3.2.0/evejs-racks16-3.2.0.zip"
     }
   ],
   "evejsVersions": [
@@ -23,17 +23,19 @@
   "featured": false,
   "highlights": [
     "客户端 `slotsContainer.CheckButtonVisibility`：`if sidx == 8: break`",
-    "服务端四份 flag 区间表：都止于 flag 34"
+    "服务端四份 flag 区间表：都止于 flag 34",
+    "结构服务槽：客户端 `serviceSlotFlags` 第 8 项是 flag 172，与燃料舱（`flagStructureFuel`）撞号 ⇒ 第 9 槽改挂 flag 189"
   ],
   "history": [],
   "id": "evejs-racks16",
-  "publishedAt": "2026-10-10",
+  "publishedAt": "2026-10-11",
   "readme": [
     "**这是「对原版游戏的扩展」，不是「替你把船改掉」。**",
     "原版服务端与客户端都把低 / 中 / 高槽卡在**每族 8 个**。本模组把这条线抬到 **16**，但\n**默认完全不碰任何舰船的槽位数值**：",
-    "| 机架 | 原版上限 | 解禁后上限 | 新增用到的 flag |\n| --- | --- | --- | --- |\n| 低槽 lowSlots | 8 | **16** | 11..18 + 37..44 |\n| 中槽 medSlots | 8 | **16** | 19..26 + 45..52 |\n| 高槽 hiSlots | 8 | **16** | 27..34 + 65..72 |\n| 改装件 rigSlots | 3 | **6** | 92..97 |",
+    "| 机架 | 原版上限 | 解禁后上限 | 新增用到的 flag |\n| --- | --- | --- | --- |\n| 低槽 lowSlots | 8 | **16** | 11..18 + 37..44 |\n| 中槽 medSlots | 8 | **16** | 19..26 + 45..52 |\n| 高槽 hiSlots | 8 | **16** | 27..34 + 65..72 |\n| 改装件 rigSlots | 3 | **6** | 92..97 |\n| 结构服务槽 serviceSlots | 8（其中 1 个还被燃料舱占着） | **9** | 164..171 + 189 |",
     "炮位硬点、子系统槽、CPU / PG 全部不变。",
     "改装件与低/中/高不同：原版一条 31° 的弧只放得下 3 个槽，所以 6 个改装件按\n**3 + 3 两环**摆（第 1 环就是原版那 3 个位置，不多不少），而不是硬挤在同一条弧上。",
+    "服务槽是**修一条原版缺陷**：客户端的 `serviceSlotFlags` 第 8 项写着 flag 172，而 172\n同时是结构燃料舱（`flagStructureFuel`）—— 往那儿装服务模块必被服务端判\n`NotEnoughCargoSpace`。本模组把它改挂到空闲的 flag **189**，于是 `serviceSlots = 9`\n的建筑（如 `47512 'Moreau' Fortizar`）九个槽才真的都能用；`serviceSlots ≤ 8` 的建筑\n拿到的仍是原来那几项，行为不变。",
     "> **装了之后你会看到什么？** 如果没改过任何船的槽位数据 —— **和没装一样**。8 槽的船还是 8 槽、\n> HUD 还是画 8 格。因为 HUD 本来就按「当前船实际槽数」画（`GetNumSlots → GetNumHiSlots()`），\n> 它不需要被\"改\"。本模组做的是**把天花板抬起来**：一旦某艘船的 `lowSlots/medSlots/hiSlots`\n> 被改成 9..16（你自己改数据、或别的模组改），它才能真的用满，而且从 HUD 到装配、编组、\n> 激活整条链都不会再出问题。",
     "槽位数有**两条上游**，两边都要有：服务端负责放行扩展槽并把槽位数下发给客户端（本模组本体，\n不修改任何文件）；客户端负责 HUD 的每族上限与 16 列布局、以及**配装界面**的槽位摆位\n（`client-patch/`，**要单独跑一次安装脚本**）。",
     "> 顺带修好配装界面第 2 环（第 9 格起）的**同环左右重叠**：原版那条环内收到 186 后，\n> 同环切向间距只有 33.3px，而槽宽 34px，会叠 0.7px。位置/半径/高度全部保留原版，\n> 只把宽度削 1px（34 → 33）把重叠清零 —— 观感与原版一致（详见 CHANGELOG 3.1.2）。",
@@ -41,8 +43,8 @@
   ],
   "repo": "https://github.com/Jasper377/evejs-mod-evejs-racks16",
   "requiresRestart": true,
-  "sha256": "ba52b119e7831f8ac827fdd8be9268b5a91a0386d4502c9f8a9c1c3a41ef4010",
-  "sizeBytes": 535225,
+  "sha256": "46df9004315c9dd0b0aab22dab0f48b36fe4687f638a2073bafac8303f7fd5e7",
+  "sizeBytes": 543345,
   "tags": [],
-  "version": "3.1.2"
+  "version": "3.2.0"
 }
