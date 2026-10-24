@@ -5,7 +5,7 @@
     "name": "正在北极拔草"
   },
   "category": "玩法",
-  "changelog": "",
+  "changelog": "适配新服务端版本",
   "conflicts": [],
   "delisted": false,
   "description": "把原版「低/中/高每族最多 8 槽」的上限解禁到 16、改装件解禁到 6、结构服务槽解禁到 9（第 9 槽改挂空闲 flag 189，避开与结构燃料舱共用的 172），默认不修改任何舰船/建筑的槽位数值；并修正配装界面的槽位摆位与交互范围。",
@@ -14,7 +14,7 @@
     {
       "mirror": "github",
       "priority": 1,
-      "url": "https://github.com/Jasper377/evejs-mod-evejs-racks16/releases/download/v3.2.0/evejs-racks16-3.2.0.zip"
+      "url": "https://github.com/Jasper377/evejs-mod-evejs-racks16/releases/download/v3.2.1/evejs-racks16-3.2.1.zip"
     }
   ],
   "evejsVersions": [
@@ -28,7 +28,7 @@
   ],
   "history": [],
   "id": "evejs-racks16",
-  "publishedAt": "2026-10-11",
+  "publishedAt": "2026-10-24",
   "readme": [
     "**这是「对原版游戏的扩展」，不是「替你把船改掉」。**",
     "原版服务端与客户端都把低 / 中 / 高槽卡在**每族 8 个**。本模组把这条线抬到 **16**，但\n**默认完全不碰任何舰船的槽位数值**：",
@@ -43,8 +43,15 @@
   ],
   "repo": "https://github.com/Jasper377/evejs-mod-evejs-racks16",
   "requiresRestart": true,
-  "sha256": "46df9004315c9dd0b0aab22dab0f48b36fe4687f638a2073bafac8303f7fd5e7",
-  "sizeBytes": 543345,
-  "tags": [],
-  "version": "3.2.0"
+  "sha256": "1229c7e4eb87168b90cc5b70b0d45189e3ff676cd5e172a3b474f8d29279eb68",
+  "sizeBytes": 549672,
+  "tags": [
+    "槽位",
+    "装配",
+    "解禁",
+    "改装件",
+    "服务槽",
+    "前置依赖"
+  ],
+  "version": "3.2.1"
 }
